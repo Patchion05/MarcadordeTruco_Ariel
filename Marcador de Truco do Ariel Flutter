@@ -1,0 +1,150 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(ScoreKeeperApp());
+}
+
+class ScoreKeeperApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Score Keeper',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: ScoreKeeperScreen(),
+    );
+  }
+}
+
+class ScoreKeeperScreen extends StatefulWidget {
+  @override
+  _ScoreKeeperScreenState createState() => _ScoreKeeperScreenState();
+}
+
+class _ScoreKeeperScreenState extends State<ScoreKeeperScreen> {
+  int scoreTeamA = 0;
+  int scoreTeamB = 0;
+
+  void _incrementScoreTeamA() {
+    setState(() {
+      if (scoreTeamA < 12) {
+        scoreTeamA++;
+      }
+    });
+  }
+
+  void _decrementScoreTeamA() {
+    setState(() {
+      if (scoreTeamA > 0) {
+        scoreTeamA--;
+      }
+    });
+  }
+
+  void _incrementScoreTeamB() {
+    setState(() {
+      if (scoreTeamB < 12) {
+        scoreTeamB++;
+      }
+    });
+  }
+
+  void _decrementScoreTeamB() {
+    setState(() {
+      if (scoreTeamB > 0) {
+        scoreTeamB--;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Score Keeper'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Equipe A',
+                    style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        onPressed: _decrementScoreTeamA,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        '$scoreTeamA',
+                        style: TextStyle(fontSize: 40, color: Colors.white),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        onPressed: _incrementScoreTeamA,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.deepOrange,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Equipe B',
+                    style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        onPressed: _decrementScoreTeamB,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        '$scoreTeamB',
+                        style: TextStyle(fontSize: 40, color: Colors.white),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        onPressed: _incrementScoreTeamB,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            if (scoreTeamA == 12 || scoreTeamB == 12)
+              Text(
+                'Fim do jogo!',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
